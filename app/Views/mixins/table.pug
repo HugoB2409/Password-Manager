@@ -1,0 +1,24 @@
+mixin TableMixin(data, tableId)
+    if data
+        if is_array(data.data)
+            if count(data.data) > 0
+                table(id=tableId).display.table.table-striped.table-bordered.dataTable
+                    thead
+                        tr
+                            each header in data.headers
+                                if (header === "meta")
+                                    th(hidden="")=header
+                                else if (header === "id")
+                                    th(hidden="")=header
+                                else
+                                    th=header
+                    tbody
+                        each row in data.data
+                            tr(data-href = '/')
+                                block
+            else
+                !=data[0]
+                p Il y a aucune données à afficher.
+        else
+            !=data
+            p Il y a aucune données à afficher.

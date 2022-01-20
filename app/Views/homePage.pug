@@ -1,0 +1,78 @@
+extends layout
+
+block js
+    script(src="/javascripts/copyClipboard.js")
+
+block content
+    .text-left
+        a.btn.btn-success.btn-md.m-2(href="/newPassword")
+            i.fa.fa-plus-circle.mr-1
+            ="Ajouter un mot de passe"
+        a.btn.btn-success.btn-md.m-2(href="/newCreditCard")
+            i.fa.fa-plus-circle.mr-1
+            ="Ajouter une carte de credit"
+    #accordionExample.accordion
+        .card(id="test123")
+            #headingOne.card-header
+                h2.mb-0
+                    button.btn.btn-link.btn-block.text-left.collapsed(type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='false' aria-controls='collapseTwo')
+                        | Favoris
+            #collapseOne.collapse.show(aria-labelledby='headingTwo' data-parent='#accordionExample')
+                .card-body
+                    +TableMixin(favoritesTable, "favortite")
+                        th.text-left
+                            a(href="http://www." + row.url)=row.url
+                        td=row.username
+                        td(class="password")=row.password
+                        td.text-center
+                            a.btn.btn-outline-warning.size-sm.col-6.m-1(href="/password/" + row.id)
+                                i.fa.fa-edit
+                            +form("post", "/deletePassword/" + row.id)
+                                button.btn.btn-outline-danger.size-sm.col-6.m-1
+                                    i.fa.fa-trash-alt
+                            a.btn.btn-outline-info.size-sm.col-6.m-1(href="/sharePassword/" + row.id)
+                                i.fa.fa-share
+                            +form("post", "/removeFavorite/" + row.id)
+                                button.btn.btn-outline-success.size-sm.col-6.m-1
+                                    i.fa.fa-heart
+        .card
+            #headingTwo.card-header
+                h2.mb-0
+                    button.btn.btn-link.btn-block.text-left(type='button' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseOne')
+                        | Vos mots de passe
+            #collapseTwo.collapse(aria-labelledby='headingOne' data-parent='#accordionExample')
+                .card-body
+                    +TableMixin(passwordsTable)
+                        th.text-left
+                            a(href="http://www." + row.url)=row.url
+                        td=row.username
+                        td(class="password")=row.password
+                        td.text-center
+                            a.btn.btn-outline-warning.size-sm.col-6.m-1(href="/password/" + row.id)
+                                i.fa.fa-edit
+                            +form("post", "/deletePassword/" + row.id)
+                                button.btn.btn-outline-danger.size-sm.col-6.m-1
+                                    i.fa.fa-trash-alt
+                            a.btn.btn-outline-info.size-sm.col-6.m-1(href="/sharePassword/" + row.id)
+                                i.fa.fa-share
+                            +form("post", "/addFavorite/" + row.id)
+                                button.btn.btn-outline-success.size-sm.col-6.m-1
+                                    i.fa.fa-heart
+        .card
+            #headingThree.card-header
+                h2.mb-0
+                    button.btn.btn-link.btn-block.text-left.collapsed(type='button' data-toggle='collapse' data-target='#collapseThree' aria-expanded='false' aria-controls='collapseTwo')
+                        | Vos carte de credits
+            #collapseThree.collapse(aria-labelledby='headingTwo' data-parent='#accordionExample')
+                .card-body
+                    +TableMixin(creditCardsTable)
+                        th.text-left=row.name
+                            td=row.number
+                            td=row.expirationmonth + "/" + row.expirationyear
+                            td=row.cvc
+                            td.text-center
+                                a.btn.btn-outline-warning.size-sm.col-6.m-1(href="/creditCard/" + row.id)
+                                    i.fa.fa-edit
+                                +form("post", "/deleteCreditCard/" + row.id)
+                                    button.btn.btn-outline-danger.size-sm.col-6.m-1
+                                        i.fa.fa-trash-alt

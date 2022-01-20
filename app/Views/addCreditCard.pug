@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    +form("post", "/newCreditCard")
+        .form-group
+            label Nom sur la carte
+            input.form-control(type="text" name="name" placeholder="Ex: Hugo Belanger")
+        .form-group
+            label Numero
+            input.form-control(type="text" name="number" placeholder="Ex: 1234 5678 9009 4321")
+        .form-group
+            label Mois d'expiration
+            input.form-control(type="text" name="expirationMonth" placeholder="Ex: 08")
+        .form-group
+            label Anne d'expiration
+            input.form-control(type="text" name="expirationYear" placeholder="Ex: 23")
+        .form-group
+            label CVC
+            input.form-control(type="text" name="cvc" placeholder="Ex: 343")
+        .text-right
+            button.btn.btn-success.btn-sm Ajouter

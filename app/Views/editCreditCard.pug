@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    +form("post", "/updateCreditCard/" + cardId)
+        .form-group
+            label Nom sur la carte
+            input.form-control(type="text" name="name" value=data.name)
+        .form-group
+            label Numero
+            input.form-control(type="text" name="number" value=data.number)
+        .form-group
+            label Mois d'expiration
+            input.form-control(type="text" name="expirationMonth" value=data.expirationmonth)
+        .form-group
+            label Anne d'expiration
+            input.form-control(type="text" name="expirationYear" value=data.expirationyear)
+        .form-group
+            label CVC
+            input.form-control(type="text" name="cvc" value=data.cvc)
+        .text-right
+            button.btn.btn-success.btn-sm Modifier

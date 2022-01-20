@@ -1,0 +1,31 @@
+include mixins/base
+include mixins/table
+
+html
+    head
+        meta(charset="utf-8")
+        title="Demo " + title
+        link(href="/stylesheets/style.css" rel="stylesheet")
+        link(href="/stylesheets/vendor/fontawesome.min.css" rel="stylesheet")
+
+        script(src="/javascripts/vendor/jquery-3.5.1.min.js")
+        script(src="/javascripts/vendor/bootstrap.min.js")
+        script(src="/javascripts/vendor/fontawesome.min.js")
+        block js
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            a.navbar-brand(href='#')
+            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link.size-md.font-weight-bold(href='/') Eruces
+                ul.navbar-nav.mr-right
+                    a.nav-link.size-lg.text-white.lni-fade-right-effect-hover(href='/logout')
+                        i.fa.fa-sign-out-alt
+        .container
+            h1=title
+            +flash
+            br
+            block content
